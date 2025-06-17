@@ -39,6 +39,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody UserEntity user) {
+        return userService.verify(user);
+    }
+
         @PutMapping("/edit")
         public ResponseEntity<?> editUser(@RequestBody UserEntity user, @RequestParam long id) {
             try{
