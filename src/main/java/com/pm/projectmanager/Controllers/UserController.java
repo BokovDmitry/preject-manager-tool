@@ -7,12 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/all")
+    @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         try {
             return ResponseEntity.ok(userService.getAllUsers());
@@ -28,20 +27,6 @@ public class UserController {
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserEntity user) {
-        try{
-            return ResponseEntity.ok(userService.register(user));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Registration failed");
-        }
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody UserEntity user) {
-        return userService.verify(user);
     }
 
         @PutMapping("/edit")
