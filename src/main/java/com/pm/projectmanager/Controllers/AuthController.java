@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -26,8 +28,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserEntity user) {
-        System.out.println(user);
-        return authService.verify(user);
+    public ResponseEntity<?> login(@RequestBody UserEntity user) {
+        String token = authService.verify(user);
+
+        if ("Failure".equals(token)) {
+            return ResponseEntity.status(401).body("Invalid credentials");
+        }
+
+        return ResponseEntity.ok().body(Map.of("token", token));
     }
 }

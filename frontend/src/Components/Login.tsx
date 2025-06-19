@@ -20,10 +20,11 @@ export default function Login() {
             console.log(token);
 
             localStorage.setItem('token', token);
+            localStorage.setItem('username', username)
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            window.location.href = '/desks';
+            window.location.href = '/';
        } catch (error) {
             console.error('Login failed:', error);
        }

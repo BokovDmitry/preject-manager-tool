@@ -19,6 +19,16 @@ public class DeskEntity {
     @JsonBackReference
     private UserEntity user;
     public DeskEntity() {}
+
+    @Override
+    public String toString() {
+        return "DeskEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
 
 
