@@ -1,6 +1,7 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Components
 
@@ -11,6 +12,7 @@ interface Desk {
 }
 
 export default function Desks() {
+    const navigate = useNavigate();
     const [desks, setDesks] = useState<Desk[]>([]);
 
     useEffect(() => {
@@ -33,7 +35,7 @@ export default function Desks() {
             <h1>Desks</h1>
             {/* <List listof="desks" /> */}
             {desks.map(desk => (
-                <div className="desk-container" key={desk.id}>
+                <div className="desk-container" key={desk.id} onClick={() => navigate(`tasks/${desk.id}`)}>
                     <h2>{desk.name}</h2>
                     <p>{desk.description}</p>
                 </div>

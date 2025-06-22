@@ -58,4 +58,13 @@ public class TaskController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PatchMapping("/{taskId}/check")
+    public ResponseEntity<?> checkTask(@PathVariable long taskId) {
+        try {
+            return ResponseEntity.ok(taskService.checkTask(taskId));
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

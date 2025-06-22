@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 import Desks from './Components/Desks.tsx';
 import Login from './Components/Login.tsx';
+import TaskList from './Components/TaskList.tsx'
 
 export default function Main() {
   return (
@@ -12,6 +13,7 @@ export default function Main() {
       <Routes>
         <Route path="/" element={<Desks />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/tasks/:deskId" element={<TaskList />}></Route>
       </Routes>
     </BrowserRouter>
   );
