@@ -51,7 +51,6 @@ public class TaskService {
             task.setTitle(newTask.getTitle());
             task.setState(newTask.getState());
             task.setDone(newTask.isDone());
-            task.regulateDone();
             return taskRepo.save(task);
         }).get();
     }
@@ -69,7 +68,6 @@ public class TaskService {
 
         TaskEntity checkedTask = taskRepo.findById(taskId).get();
         checkedTask.setDone(!checkedTask.isDone());
-        checkedTask.regulateDone();
         return taskRepo.save(checkedTask);
     }
 }

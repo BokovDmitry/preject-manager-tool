@@ -23,22 +23,20 @@ public class TaskEntity {
     public TaskEntity() {
         this.state = TASK_STATE.TODO;
     }
-//
-//    public void setDone(boolean done) {
-//        this.done = done;
-//        regulateDone();
-//    }
-//
-//    public void setState(TASK_STATE state) {
-//        this.state = state;
-//        regulateDone();
-//    }
 
-    public void regulateDone() {
-        if(this.state == TASK_STATE.DONE)
-            this.done = true;
+    public void setDone(boolean done) {
+        this.done = done;
+
         if(this.done)
             this.state = TASK_STATE.DONE;
+        else
+            this.state = TASK_STATE.IN_PROGRESS;
+    }
+
+    public void setState(TASK_STATE state) {
+        this.state = state;
+
+        this.done = this.state == TASK_STATE.DONE;
     }
 
     @Override
