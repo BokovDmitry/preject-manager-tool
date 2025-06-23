@@ -1,5 +1,5 @@
 import { TaskState } from "../Enums/TaskState.ts"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios"
 
 import StateSelector from "./StateSelector.tsx"

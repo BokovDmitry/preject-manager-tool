@@ -17,7 +17,7 @@ export default function TaskList() {
     const { deskId } = useParams<{ deskId: string }>();
     const [tasks, setTasks] = useState<taskDetails[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
-    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+    const [editTask, setEditTask] = useState<taskDetails | null>(null)
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/tasks/all`, {
@@ -36,6 +36,11 @@ export default function TaskList() {
             console.error("❌ Error fetching tasks:", error);
         });
     }, [deskId]);
+
+    useEffect(() => {
+        setIsAddModalOpen(false)
+        setEditTask(null)
+    }, [])
 
     const onDelete = async(taskId : number) => {
         try {
@@ -62,15 +67,16 @@ export default function TaskList() {
                 <TaskModal method="POST" onClose={() => setIsAddModalOpen(!isAddModalOpen)} deskId={deskId} />
             )}
 
+            {editTask && 
+                <TaskModal method="PUT" onClose={() => setEditTask(null)} task={editTask} taskId={editTask.id}/>}
+
             <h1>Tasks for Desk {deskId}</h1>
             {tasks.map(task => (
                 <div className="task-container">
                     <Task task={task} key={task.id}/>
                     <button className="delete-task-button" onClick={() => onDelete(task.id)}>Delete</button>
-                    <button className="edit-task-button" onClick={() => setIsEditModalOpen(!isEditModalOpen)}>Edit</button>
+                    <button className="edit-task-button" onClick={() => setEditTask(task)}>Edit</button>
 
-                    {isEditModalOpen && 
-                <TaskModal method="PUT" onClose={() => setIsEditModalOpen(!isEditModalOpen)} task={task} taskId={task.id}/>}
                 </div>
             ))}
 
