@@ -6,13 +6,17 @@ import './index.css';
 import Desks from './Components/Desks.tsx';
 import Login from './Components/Login.tsx';
 import TaskList from './Components/TaskList.tsx'
+import Home from './Components/Home.tsx'
+import NavBar from './Components/NavBar.tsx'
 
 export default function Main() {
   return (
     <BrowserRouter>
+    <NavBar />
       <Routes>
-        <Route path="/" element={<Desks />} />
+        <Route path="/desks" element={<Desks />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/home' element={<Home />} />
         <Route path="/tasks/:deskId" element={<TaskList />}></Route>
       </Routes>
     </BrowserRouter>

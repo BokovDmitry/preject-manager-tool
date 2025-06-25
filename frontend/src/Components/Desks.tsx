@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // Components
 import DeskModal from "./DeskModal.tsx";
+import NavBar from "./NavBar.tsx"
 
 interface DeskDetails {
     name: string;

@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import axios from 'axios';
 
+import NavBar from './NavBar.tsx'
+
 export default function Login() {
 
     const [username, setUsername] = useState('');

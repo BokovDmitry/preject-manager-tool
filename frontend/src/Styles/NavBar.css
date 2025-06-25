@@ -1,0 +1,50 @@
+.navbar-container {
+  position: relative;
+  width: 100%;
+  height: clamp(50px, 12vh, 150px);
+  padding: 2em 10em;
+  box-sizing: border-box;
+}
+.navbar-container .navbar-content {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0.5em;
+  border-radius: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(57, 110, 255);
+  box-shadow: inset 2px 2px 5px rgb(4, 52, 185), inset -3px -3px 5px rgb(130, 156, 227);
+}
+.navbar-container .navbar-content::after {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 32%;
+  top: 15%;
+  left: var(--slider-left, 1%);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+.navbar-container .navbar-content .navbar-option {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  padding: 0 1em;
+  transition: all 0.3s ease-in-out;
+}
+.navbar-container .navbar-content .navbar-option.active-option {
+  font-size: large;
+  color: white;
+  font-weight: bold;
+}
+.navbar-container .navbar-content .navbar-option.inactive-option {
+  color: white;
+}/*# sourceMappingURL=NavBar.css.map */
