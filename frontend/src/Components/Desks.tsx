@@ -81,7 +81,7 @@ export default function Desks() {
                         </div>
                         <div className="desk-buttons-container">
                             <div onClick={()=>setEditDesk(desk)} className="desk-button-container">
-                                <img src="../../public/icons/pencil.png"/>
+                                <img src="../icons/pencil.png"/>
                             </div>
                             <button onClick={() => onDelete(desk.id)} className="desk-button-container">Delete</button>
                         </div>
