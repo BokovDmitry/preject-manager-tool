@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: clamp(50px, 12vh, 150px);
-  padding: 2em 10em;
+  padding: 2em 0;
   box-sizing: border-box;
 }
 .navbar-container .navbar-content {

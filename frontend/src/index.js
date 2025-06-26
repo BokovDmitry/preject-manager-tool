@@ -17,7 +17,7 @@ export default function Main() {
         <Route path="/desks" element={<Desks />} />
         <Route path="/login" element={<Login />} />
         <Route path='/home' element={<Home />} />
-        <Route path="/tasks/:deskId" element={<TaskList />}></Route>
+        <Route path="/desks/tasks/:deskId" element={<TaskList />}></Route>
       </Routes>
     </BrowserRouter>
   );

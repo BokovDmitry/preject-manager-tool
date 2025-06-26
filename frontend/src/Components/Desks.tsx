@@ -4,12 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 // Components
 import DeskModal from "./DeskModal.tsx";
-import NavBar from "./NavBar.tsx"
+import "../Styles/Desks.scss"
+
+interface TaskDetails {
+  title: string;
+  id: number;
+  done: boolean;
+  state: string;
+}
 
 interface DeskDetails {
     name: string;
     description: string;
     id: number;
+    tasks : TaskDetails[]
 }
 
 export default function Desks() {
@@ -17,6 +25,7 @@ export default function Desks() {
     const [desks, setDesks] = useState<DeskDetails[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
     const [editDesk, setEditDesk] = useState<DeskDetails | null>(null)
+    const [taskNum, setTaskNum] = useState<number>(0)
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -31,7 +40,8 @@ export default function Desks() {
         })
         .then(response => setDesks(response.data))
         .catch(error => console.error("Error fetching data:", error));
-    }, []);
+
+    }, []); 
 
     const onDelete = async(id : number) => {
         try {
@@ -49,16 +59,24 @@ export default function Desks() {
     }
     
     return (
-        <div className="desks">
+        <div className="desks-container">
             {localStorage.getItem('username') && isAddModalOpen && <DeskModal method="POST" onClose={() => setIsAddModalOpen(false)} username={localStorage.getItem('username')!}/>}
             {editDesk && <DeskModal method="PUT" onClose={() => setEditDesk(null)} desk={editDesk} deskId={editDesk.id}/>}
-            <h1>Desks</h1>
             {desks.map(desk => (
                 <div className="desk-container" key={desk.id}>
-                    <h2 onClick={() => navigate(`tasks/${desk.id}`)}>{desk.name}</h2>
-                    <p>{desk.description}</p>
-                    <button onClick={()=>setEditDesk(desk)}>Edit</button>
-                    <button onClick={() => onDelete(desk.id)}>Delete</button>
+                    <div className="desk-hat">
+                        <p 
+                            onClick={() => navigate(`tasks/${desk.id}`)}
+                            className="desk-title">
+                                {desk.name}
+                        </p>
+                    </div>
+                    <div className="desk-content">
+                        <p>{desk.description}</p>
+                        <p>Tasks : {desk.tasks.length}</p>
+                        <button onClick={()=>setEditDesk(desk)}>Edit</button>
+                        <button onClick={() => onDelete(desk.id)}>Delete</button>
+                    </div>
                 </div>
             ))}
 
