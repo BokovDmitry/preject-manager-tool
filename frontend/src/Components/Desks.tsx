@@ -18,6 +18,7 @@ interface DeskDetails {
     description: string;
     id: number;
     tasks : TaskDetails[]
+    progress : number
 }
 
 export default function Desks() {
@@ -25,7 +26,6 @@ export default function Desks() {
     const [desks, setDesks] = useState<DeskDetails[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
     const [editDesk, setEditDesk] = useState<DeskDetails | null>(null)
-    const [taskNum, setTaskNum] = useState<number>(0)
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -38,7 +38,10 @@ export default function Desks() {
                 username : localStorage.getItem('username')
             }
         })
-        .then(response => setDesks(response.data))
+        .then(response => {
+            setDesks(response.data)
+            console.log(response.data)
+        })
         .catch(error => console.error("Error fetching data:", error));
 
     }, []); 
@@ -72,10 +75,16 @@ export default function Desks() {
                         </p>
                     </div>
                     <div className="desk-content">
-                        <p>{desk.description}</p>
-                        <p>Tasks : {desk.tasks.length}</p>
-                        <button onClick={()=>setEditDesk(desk)}>Edit</button>
-                        <button onClick={() => onDelete(desk.id)}>Delete</button>
+                        <div className="desk-description">{desk.description}</div>
+                        <div className="desk-progress-container">
+                            <div className="desk-progress" style={{ width : desk.progress+"%" }}></div>
+                        </div>
+                        <div className="desk-buttons-container">
+                            <div onClick={()=>setEditDesk(desk)} className="desk-button-container">
+                                <img src="../../public/icons/pencil.png"/>
+                            </div>
+                            <button onClick={() => onDelete(desk.id)} className="desk-button-container">Delete</button>
+                        </div>
                     </div>
                 </div>
             ))}

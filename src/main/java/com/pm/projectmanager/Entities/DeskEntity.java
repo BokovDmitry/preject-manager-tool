@@ -26,6 +26,15 @@ public class DeskEntity {
     @JsonManagedReference
     private List<TaskEntity> tasks;
 
+    public double getProgress() {
+        if(tasks==null || tasks.isEmpty())
+            return 0.0;
+        else {
+            double completed = tasks.stream().filter(TaskEntity::isDone).count();
+            return (completed * 100.0) / tasks.size();
+        }
+    }
+
     public DeskEntity() {}
 
     @Override
@@ -38,37 +47,4 @@ public class DeskEntity {
                 ", tasks=" + tasks +
                 '}';
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
