@@ -1,0 +1,64 @@
+.task-wrapper {
+  .task-container {
+    position: relative;
+    width: 100%;
+    border: 2px solid rgb(57, 110, 255);
+    border-radius: 15px;
+    padding: 0.5em;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    background-color: white;
+    z-index: 1;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    .task-input-label {
+      display: block;
+      width: 100%;
+      text-align: center;
+
+      .task-input {
+        display: none;
+      }
+    }
+
+    &:has(.task-input:checked) {
+      background-color: rgb(129, 160, 247);
+      color: #000;
+      text-decoration: line-through;
+    }
+
+    // 👇 Reveal buttons on hover
+    &:hover + .task-buttons-container {
+      max-height: 100px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  .task-buttons-container {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    pointer-events: none; // prevent interactions when hidden
+
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 0.5em;
+
+    button {
+      padding: 0.3em 0.6em;
+      border: none;
+      border-radius: 5px;
+      background-color: rgb(57, 110, 255);
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

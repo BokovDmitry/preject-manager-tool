@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from 'react'
 
+import "../Styles/Task.scss"
+
 interface TaskDetails {
   title: string;
   id: number;
@@ -33,7 +35,6 @@ export default function Task({ task }: TaskProps) {
   };
 
   return (
-    <div className="task-container">
       <label className="task-input-label">
         {task.title}
         <input
@@ -43,6 +44,5 @@ export default function Task({ task }: TaskProps) {
           onChange={() => checkTask(task.id)}
         />
       </label>
-    </div>
-  );
+);
 }

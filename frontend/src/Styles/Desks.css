@@ -6,6 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
+  margin-top: 3em;
 }
 .desks-container .desk-container {
   position: relative;
@@ -13,23 +14,105 @@
   height: clamp(200px, 30vh, 500px);
   padding: 1em;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+}
+.desks-container .desk-container:hover {
+  transform: scale(1.05);
 }
 .desks-container .desk-container .desk-content {
   position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: 2px 2px 5px black;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.299);
   border-radius: 15px;
-  padding: 1em;
+  padding: 1.5em;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "description description" "progress buttons";
+  transition: all 0.3s ease-in-out;
+}
+.desks-container .desk-container .desk-content:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.208);
+}
+.desks-container .desk-container .desk-content .desk-description {
+  grid-area: description;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.desks-container .desk-container .desk-content .desk-progress-container {
+  grid-area: progress;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: relative;
+  height: minmax(20px, 70%);
+  width: 100%;
+  border-radius: 30px;
+  padding: 2px;
+  border: 2px solid rgb(1, 25, 91);
+}
+.desks-container .desk-container .desk-content .desk-progress-container .desk-progress {
+  height: 100%;
+  background-color: rgb(57, 110, 255);
+  border-radius: 30px;
+}
+.desks-container .desk-container .desk-content .desk-buttons-container {
+  grid-area: buttons;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  gap: 1em;
+  z-index: 2;
+}
+.desks-container .desk-container .desk-content .desk-buttons-container .desk-button-container {
+  display: flex;
+  position: relative;
+  width: clamp(20px, 2vw, 60px);
+  height: clamp(20px, 2vw, 60px);
+  border-radius: 30px;
+  background-color: rgb(57, 110, 255);
+  padding: 0.5em;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+.desks-container .desk-container .desk-content .desk-buttons-container .desk-button-container:hover {
+  background-color: rgb(1, 25, 91);
+  transform: scale(1.05);
+}
+.desks-container .desk-container .desk-content .desk-buttons-container .desk-button-container .desk-button {
+  width: 100%;
+  height: 100%;
+  filter: invert(1);
 }
 .desks-container .desk-container .desk-hat {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
   height: 3em;
   background-color: rgb(57, 110, 255);
   border-radius: 15px 15px 0 0;
+  box-shadow: inset 2px 2px 5px rgb(160, 184, 249), 2px 2px 5px rgba(0, 0, 0, 0.389), inset -2px -2px 5px rgb(1, 25, 91);
   z-index: 1;
+}
+.desks-container .desk-container .desk-hat .desk-title {
+  color: white;
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 600;
 }/*# sourceMappingURL=Desks.css.map */

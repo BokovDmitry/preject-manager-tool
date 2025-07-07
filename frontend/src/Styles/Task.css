@@ -1,0 +1,53 @@
+.task-wrapper .task-container {
+  position: relative;
+  width: 100%;
+  border: 2px solid rgb(57, 110, 255);
+  border-radius: 15px;
+  padding: 0.5em;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+  z-index: 1;
+}
+.task-wrapper .task-container:hover {
+  transform: scale(1.02);
+}
+.task-wrapper .task-container .task-input-label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.task-wrapper .task-container .task-input-label .task-input {
+  display: none;
+}
+.task-wrapper .task-container:has(.task-input:checked) {
+  background-color: rgb(129, 160, 247);
+  color: #000;
+  text-decoration: line-through;
+}
+.task-wrapper .task-container:hover + .task-buttons-container {
+  max-height: 100px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.task-wrapper .task-buttons-container {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+.task-wrapper .task-buttons-container button {
+  padding: 0.3em 0.6em;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(57, 110, 255);
+  color: white;
+  cursor: pointer;
+}/*# sourceMappingURL=Task.css.map */

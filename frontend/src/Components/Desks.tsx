@@ -66,10 +66,9 @@ export default function Desks() {
             {localStorage.getItem('username') && isAddModalOpen && <DeskModal method="POST" onClose={() => setIsAddModalOpen(false)} username={localStorage.getItem('username')!}/>}
             {editDesk && <DeskModal method="PUT" onClose={() => setEditDesk(null)} desk={editDesk} deskId={editDesk.id}/>}
             {desks.map(desk => (
-                <div className="desk-container" key={desk.id}>
+                <div className="desk-container" key={desk.id} onClick={() => navigate(`tasks/${desk.id}`)}>
                     <div className="desk-hat">
                         <p 
-                            onClick={() => navigate(`tasks/${desk.id}`)}
                             className="desk-title">
                                 {desk.name}
                         </p>
@@ -80,10 +79,12 @@ export default function Desks() {
                             <div className="desk-progress" style={{ width : desk.progress+"%" }}></div>
                         </div>
                         <div className="desk-buttons-container">
-                            <div onClick={()=>setEditDesk(desk)} className="desk-button-container">
-                                <img src="../icons/pencil.png"/>
+                            <div onClick={(e)=>{e.stopPropagation(); setEditDesk(desk)}} className="desk-button-container">
+                                <img className="desk-button" src="/icons/pencil.png" alt="edit" />
                             </div>
-                            <button onClick={() => onDelete(desk.id)} className="desk-button-container">Delete</button>
+                            <div onClick={(e) => {e.stopPropagation(); onDelete(desk.id)}} className="desk-button-container">
+                                <img className="desk-button" src="/icons/delete.png" alt="delete"/>
+                            </div>
                         </div>
                     </div>
                 </div>
