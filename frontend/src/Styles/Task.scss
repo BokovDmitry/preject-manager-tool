@@ -1,4 +1,19 @@
 .task-wrapper {
+  &:hover {
+    .task-container {
+      transform: scale(1.02);
+    }
+
+    .task-buttons-container {
+      max-height: 120px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      padding: 0.5em 0;
+      box-sizing: border-box  ;
+    }
+  }
+
   .task-container {
     position: relative;
     width: 100%;
@@ -9,34 +24,19 @@
     transition: all 0.2s ease-in-out;
     background-color: white;
     z-index: 1;
-
-    &:hover {
-      transform: scale(1.02);
-    }
+    margin-top: 0.5em;
 
     .task-input-label {
-      display: block;
-      width: 100%;
-      text-align: center;
-
       .task-input {
         display: none;
       }
     }
+  }
 
-    &:has(.task-input:checked) {
-      background-color: rgb(129, 160, 247);
-      color: #000;
-      text-decoration: line-through;
-    }
-
-    // 👇 Reveal buttons on hover
-    &:hover + .task-buttons-container {
-      max-height: 100px;
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+  .checked {
+    background-color: rgb(129, 160, 247);
+    color: #000;
+    text-decoration: line-through;
   }
 
   .task-buttons-container {
@@ -45,20 +45,25 @@
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease-in-out;
-    pointer-events: none; // prevent interactions when hidden
+    pointer-events: none;
 
     display: flex;
     justify-content: center;
     gap: 1em;
-    margin-top: 0.5em;
 
-    button {
+    .task-button {
       padding: 0.3em 0.6em;
       border: none;
       border-radius: 5px;
       background-color: rgb(57, 110, 255);
       color: white;
+      width: max(50px, 6  vw);
       cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        transform:scale(1.05);
+      }
     }
   }
 }

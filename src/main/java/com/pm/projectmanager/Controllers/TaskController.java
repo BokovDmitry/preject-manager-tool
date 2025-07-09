@@ -2,9 +2,12 @@ package com.pm.projectmanager.Controllers;
 
 import com.pm.projectmanager.Entities.TaskEntity;
 import com.pm.projectmanager.Services.TaskService;
+import com.pm.projectmanager.Utils.TASK_STATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/tasks")
@@ -58,6 +61,16 @@ public class TaskController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PatchMapping("/{taskId}/update")
+    public ResponseEntity<?> updateState(@PathVariable long taskId, @RequestBody Map<String, String> body) {
+        try {
+            return ResponseEntity.ok(taskService.updateState(taskId, TASK_STATE.valueOf(body.get("state"))));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
     @PatchMapping("/{taskId}/check")
     public ResponseEntity<?> checkTask(@PathVariable long taskId) {

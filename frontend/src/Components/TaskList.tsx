@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import Task from "./Task.tsx";
+import Section from "./Section.tsx";
 import { TaskState } from "../Enums/TaskState.ts";
 import TaskModal from "./TaskModal.tsx";
 
@@ -24,9 +24,7 @@ export default function TaskList() {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/tasks/all`, {
-        params: {
-          deskId: deskId,
-        },
+        params: { deskId },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -40,42 +38,51 @@ export default function TaskList() {
       });
   }, [deskId]);
 
-  useEffect(() => {
-    setIsAddModalOpen(false);
-    setEditTask(null);
-  }, []);
-
   const onDelete = async (taskId: number) => {
     try {
-      const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/tasks/deletetask`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          params: {
-            taskId: taskId,
-          },
-        }
-      );
-
-      console.log("✅ Task Deleted: ", response.data);
-      window.location.reload();
+      await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/deletetask`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        params: { taskId },
+      });
+      console.log("✅ Task Deleted:", taskId);
+      setTasks((prev) => prev.filter((t) => t.id !== taskId));
     } catch (error) {
-      console.error("❌Delete failed: ", error);
+      console.error("❌ Delete failed:", error);
     }
   };
+
+  const handleTaskDrop = async (task: taskDetails, newState: TaskState) => {
+    if(task.state === newState) return
+    
+    try {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/tasks/${task.id}/update`, 
+        {state : newState},
+        {
+          headers: {
+            Authorization : `Bearer ${localStorage.getItem("token")}`
+          }
+      })
+
+      setTasks((prevTask) => prevTask.map((t) => t.id === task.id ? {...t, state: newState} : t))
+
+      console.log("✅ Task moved to:", newState);
+    } catch(error) {
+      console.error(error)
+    }
+
+  }
 
   return (
     <div className="container">
       {deskId && isAddModalOpen && (
         <TaskModal
           method="POST"
-          onClose={() => setIsAddModalOpen(!isAddModalOpen)}
+          onClose={() => setIsAddModalOpen(false)}
           deskId={deskId}
         />
       )}
-
       {editTask && (
         <TaskModal
           method="PUT"
@@ -85,28 +92,22 @@ export default function TaskList() {
         />
       )}
 
-      <div className="backlog-container">
-        <h1 className="section-title">Backlog</h1>
-        {tasks.map((task) => (
-          <div className="task-wrapper">
-            <div className="task-container">
-              <Task task={task} key={task.id} />
-            </div>
-            <div className="task-buttons-container">
-              <button className="task-button" onClick={() => onDelete(task.id)}>
-                Delete
-              </button>
-              <button className="task-button" onClick={() => setEditTask(task)}>
-                Edit
-              </button>
-            </div>
-          </div>
+      <div className="section-grid">
+        {(Object.values(TaskState) as TaskState[]).map((state) => (
+          <Section
+            key={state}
+            title={state}
+            tasks={tasks.filter((task) => task.state === state)}
+            onDelete={onDelete}
+            onEdit={setEditTask}
+            onDropTask={handleTaskDrop}
+          />
         ))}
       </div>
 
       <button
         className="add-task-button"
-        onClick={() => setIsAddModalOpen(!isAddModalOpen)}
+        onClick={() => setIsAddModalOpen(true)}
       >
         Add
       </button>

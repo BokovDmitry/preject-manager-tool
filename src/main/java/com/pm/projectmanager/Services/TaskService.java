@@ -5,6 +5,7 @@ import com.pm.projectmanager.Exceptions.NoSuchDeskException;
 import com.pm.projectmanager.Exceptions.NoSuchTaskException;
 import com.pm.projectmanager.Repo.DeskRepo;
 import com.pm.projectmanager.Repo.TaskRepo;
+import com.pm.projectmanager.Utils.TASK_STATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
@@ -69,5 +70,14 @@ public class TaskService {
         TaskEntity checkedTask = taskRepo.findById(taskId).get();
         checkedTask.setDone(!checkedTask.isDone());
         return taskRepo.save(checkedTask);
+    }
+
+    public TaskEntity updateState(long taskId, TASK_STATE newState) {
+        if(!taskRepo.existsById(taskId))
+            throw new NoSuchTaskException("Could not open the task. Task does not exist");
+
+        TaskEntity newTask = taskRepo.findById(taskId).get();
+        newTask.setState(newState);
+        return taskRepo.save(newTask);
     }
 }

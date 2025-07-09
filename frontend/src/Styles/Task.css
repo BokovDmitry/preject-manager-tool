@@ -1,3 +1,14 @@
+.task-wrapper:hover .task-container {
+  transform: scale(1.02);
+}
+.task-wrapper:hover .task-buttons-container {
+  max-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  padding: 0.5em 0;
+  box-sizing: border-box;
+}
 .task-wrapper .task-container {
   position: relative;
   width: 100%;
@@ -8,28 +19,15 @@
   transition: all 0.2s ease-in-out;
   background-color: white;
   z-index: 1;
-}
-.task-wrapper .task-container:hover {
-  transform: scale(1.02);
-}
-.task-wrapper .task-container .task-input-label {
-  display: block;
-  width: 100%;
-  text-align: center;
+  margin-top: 0.5em;
 }
 .task-wrapper .task-container .task-input-label .task-input {
   display: none;
 }
-.task-wrapper .task-container:has(.task-input:checked) {
+.task-wrapper .checked {
   background-color: rgb(129, 160, 247);
   color: #000;
   text-decoration: line-through;
-}
-.task-wrapper .task-container:hover + .task-buttons-container {
-  max-height: 100px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
 }
 .task-wrapper .task-buttons-container {
   max-height: 0;
@@ -41,13 +39,17 @@
   display: flex;
   justify-content: center;
   gap: 1em;
-  margin-top: 0.5em;
 }
-.task-wrapper .task-buttons-container button {
+.task-wrapper .task-buttons-container .task-button {
   padding: 0.3em 0.6em;
   border: none;
   border-radius: 5px;
   background-color: rgb(57, 110, 255);
   color: white;
+  width: max(50px, 6 vw);
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.task-wrapper .task-buttons-container .task-button:hover {
+  transform: scale(1.05);
 }/*# sourceMappingURL=Task.css.map */

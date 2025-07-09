@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import "../Styles/Task.scss"
 
@@ -16,33 +16,30 @@ interface TaskProps {
 
 export default function Task({ task }: TaskProps) {
 
-    const [isChecked, setIsChecked] = useState<boolean>(task.done)
+  const [isChecked, setIsChecked] = useState<boolean>(task.done)
 
-  const checkTask = async (taskId: number) => {
-    try {
-      await axios.patch(`${process.env.REACT_APP_API_URL}/tasks/${taskId}/check`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+  useEffect(() => {
+    task.state === "DONE" ? setIsChecked(true) : setIsChecked(false)
+    console.log(task.state)
+  }, [task])
 
-      setIsChecked(!isChecked)
-
-      console.log("✅ Successfully checked");
-    } catch (error) {
-      console.error("❌ Error checking task:", error);
-    }
-  };
+  const handleDragStart = (e: React.DragEvent) => {
+    e.dataTransfer.setData("text/plain", JSON.stringify(task))
+  }
 
   return (
-      <label className="task-input-label">
+    <div 
+      className={`task-container ${isChecked ? "checked" : ""}`}
+      draggable
+      onDragStart={handleDragStart}>
+      <label 
+        className="task-input-label">
         {task.title}
         <input
           type="checkbox"
           className="task-input"
-          checked={isChecked}
-          onChange={() => checkTask(task.id)}
         />
       </label>
+      </div>
 );
 }
