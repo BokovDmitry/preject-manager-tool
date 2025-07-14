@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // Components
 import DeskModal from "./DeskModal.tsx";
+import ConfirmationModal from "./ConfirmationModal.tsx"
 import "../Styles/Desks.scss"
 
 interface TaskDetails {
@@ -26,6 +27,8 @@ export default function Desks() {
     const [desks, setDesks] = useState<DeskDetails[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
     const [editDesk, setEditDesk] = useState<DeskDetails | null>(null)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+    const [idToDelete, setIdToDelete] = useState<number>(-1)
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -62,6 +65,13 @@ export default function Desks() {
     }
     
     return (
+        <>
+        {isDeleteModalOpen ? <ConfirmationModal 
+                    onClose={() => setDeleteModalOpen(false)} 
+                    onAction={() => onDelete(idToDelete)} 
+                    text="Are you sure you want to delete this desk?"
+                    color="red"
+                    action="Delete"/> : null}
         <div className="desks-container">
             {localStorage.getItem('username') && isAddModalOpen && <DeskModal method="POST" onClose={() => setIsAddModalOpen(false)} username={localStorage.getItem('username')!}/>}
             {editDesk && <DeskModal method="PUT" onClose={() => setEditDesk(null)} desk={editDesk} deskId={editDesk.id}/>}
@@ -82,7 +92,7 @@ export default function Desks() {
                             <div onClick={(e)=>{e.stopPropagation(); setEditDesk(desk)}} className="desk-button-container">
                                 <img className="desk-button" src="/icons/pencil.png" alt="edit" />
                             </div>
-                            <div onClick={(e) => {e.stopPropagation(); onDelete(desk.id)}} className="desk-button-container">
+                            <div onClick={(e) => {e.stopPropagation(); setDeleteModalOpen(true); setIdToDelete(desk.id)}} className="desk-button-container">
                                 <img className="desk-button" src="/icons/delete.png" alt="delete"/>
                             </div>
                         </div>
@@ -90,7 +100,8 @@ export default function Desks() {
                 </div>
             ))}
 
-            <button onClick={() => setIsAddModalOpen(!isAddModalOpen)}>Add</button>
         </div>
+        <button onClick={() => setIsAddModalOpen(!isAddModalOpen)} className="desk-add-button">Add</button>
+        </>
     );
 }

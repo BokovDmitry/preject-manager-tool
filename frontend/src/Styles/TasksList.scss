@@ -6,18 +6,42 @@
 
     .section-container {
         background-color: #f4f4f4;
-        padding: 1rem;
         border-radius: 15px;
 
         .section-title {
             margin: 0;
-            margin-bottom: 0.5em;
-            padding: 0;
+            padding: 1rem;
+        }
+
+        .section-content {
+            max-height: 30vh;
+            overflow-y: scroll;
+            padding: 1em;
+            box-sizing: border-box;
         }
     }
 
     .backlog {
         border: 4px dotted rgb(4, 52, 185);
         background-color: white;
+    }
+
+}
+.add-task-button {
+    position: absolute;
+    right: 10em;
+    width: max(150px, 10vw);
+    margin-top: 1em;
+    padding: 0.5em;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    background-color: rgb(57, 110, 255);
+    font-size: medium;
+    box-shadow: 2px 2px 5px rgb(1, 19, 69), -2px -2px 5px rgb(160, 184, 249);
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 1px 1px 3px rgb(0, 0, 0);
     }
 }
