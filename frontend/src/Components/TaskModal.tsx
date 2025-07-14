@@ -4,6 +4,8 @@ import axios from "axios"
 
 import StateSelector from "./StateSelector.tsx"
 
+import "../Styles/TaskModal.scss"
+
 interface TaskDetails {
     title : string
     done : boolean
@@ -56,19 +58,29 @@ export default function TaskModal({method, task, onClose, deskId, taskId} : Task
 
     return (
         <div className="task-modal-container">
-            <h2 className="task-modal-title">{method === "POST" ? "Add" : "Edit"} Task</h2>
-            <input 
-                type="text" 
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Task title"
-                />
+            <div className="task-modal-header">
+              <h2 className="task-modal-header-title">{method === "POST" ? "Add" : "Edit"} Task</h2>
+              <button onClick={onClose} className="task-modal-close">×</button>
+            </div>
 
-            <StateSelector value={state} onChange={setState}/>
-            
-            <button onClick={onSave}>Save</button>
-            <button onClick={onClose}>Cancel</button>
-            
+            <div className="task-modal-content">
+                <div className="task-modal-field">
+                    <p className="task-modal-title">Title</p>
+                    <input 
+                        type="text" 
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Task title"
+                        className="task-modal-input"
+                    />
+                </div>
+
+                <StateSelector value={state} onChange={setState}/>
+                
+                <div className="task-modal-buttons-container">
+                    <button onClick={onSave} className="task-modal-button">Save</button>
+                </div>
+            </div>
         </div>
     )
 }

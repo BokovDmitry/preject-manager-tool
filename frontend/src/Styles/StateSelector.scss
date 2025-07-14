@@ -1,0 +1,21 @@
+.state-selector-container {
+    width: 100%;
+
+    .task-state-selector-title {
+        text-align: center;
+        color: rgb(23, 63, 172);
+        font-size: larger;
+        font-weight: 600;
+        padding: 0;
+        margin: 0.2em;
+    }
+
+    .task-state-selector {
+        width: 100%;
+        background-color: transparent;
+        padding: 0.5em;
+        box-sizing: border-box;
+        border-radius: 15px;
+        border: 3px dotted rgb(57, 110, 255);
+    }
+}

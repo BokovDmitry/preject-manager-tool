@@ -1,0 +1,115 @@
+.task-modal-container {
+  position: fixed;
+  inset: 0px;
+  width: 30vw;
+  height: 35vh;
+  max-width: 100vw;
+  max-height: 100dvh;
+  margin: auto;
+  background-color: white;
+  z-index: 2;
+  box-shadow: 0px 0px 1000px black;
+  border-radius: 20px;
+  border: 3px solid rgb(57, 110, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: scroll;
+
+  .task-modal-header {
+    background-color: rgb(57, 110, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0.3em 1em;
+
+    .task-modal-header-title {
+      color: white;
+      font-size: larger;
+      font-weight: 600;
+      margin: 0;
+      text-align: center;
+    }
+
+    .task-modal-close {
+      position: absolute;
+      right: 0.5em;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+
+      &:hover {
+        color: rgb(200, 200, 255);
+      }
+    }
+  }
+
+  .task-modal-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100%;
+    padding: 0.2em 1em;
+    box-sizing: border-box;
+    overflow-y: scroll;
+
+    .task-modal-field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.3em;
+
+      .task-modal-title {
+        text-align: center;
+        color: rgb(23, 63, 172);
+        font-size: larger;
+        font-weight: 600;
+        padding: 0;
+        margin: 0;
+      }
+
+      .task-modal-input {
+        padding: 0.5em;
+        box-sizing: border-box;
+        border-radius: 15px;
+        border: 3px dotted rgb(57, 110, 255);
+        resize: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.9em;
+
+        &:focus {
+          border: none;
+          outline: 2px solid rgb(57, 110, 255);
+        }
+      }
+    }
+  }
+
+  .task-modal-buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+    box-sizing: border-box;
+
+    .task-modal-button {
+      width: max(20%, 100px);
+      border: none;
+      background: radial-gradient(rgb(57, 110, 255), rgb(57, 110, 255));
+      color: white;
+      padding: 0.5em;
+      border-radius: 30px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: radial-gradient(rgb(57, 110, 255), rgb(11, 40, 120));
+      }
+    }
+  }
+}

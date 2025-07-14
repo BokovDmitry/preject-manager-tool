@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+import "../Styles/DeskModal.scss"
+
 interface DeskDetails {
     name: string;
     description: string;
@@ -51,19 +53,39 @@ export default function DeskModal({method, desk, onClose, deskId, username} : De
 
     return (
         <div className="desk-modal-container">
-            <input 
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-            />
-            <textarea 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description"
-            />
-            <button onClick={onSave}>Save</button>
-            <button onClick={onClose}>Close</button>
+            <div className="desk-modal-header">
+              <h2 className="desk-modal-header-title">{method === "POST" ? "Add" : "Edit"} Task</h2>
+              <button onClick={onClose} className="desk-modal-close">×</button>
+            </div>
+            <div className="desk-modal-content">
+                <div className="desk-modal-field">
+                    <p className="desk-modal-title">
+                        Title
+                    </p>
+                    <input 
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Title"
+                        className="desk-modal-input"
+                    />
+                </div>
+                <div className="desk-modal-field">
+                    <p className="desk-modal-title">
+                        Description
+                    </p>
+                    <textarea 
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Description"
+                        className="desk-modal-input"
+                    />
+                </div>
+            </div>
+            <div className="desk-modal-buttons-container">
+                {/* <button onClick={onClose} className="desk-modal-button">Close</button> */}
+                <button onClick={onSave}  className="desk-modal-button">Save</button>
+            </div>
         </div>
     )
 }
