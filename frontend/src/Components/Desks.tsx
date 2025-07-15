@@ -87,6 +87,7 @@ export default function Desks() {
                         <div className="desk-description">{desk.description}</div>
                         <div className="desk-progress-container">
                             <div className="desk-progress" style={{ width : desk.progress+"%" }}></div>
+                            <p className="desk-progress-percentage">{Math.round(desk.progress)}%</p>
                         </div>
                         <div className="desk-buttons-container">
                             <div onClick={(e)=>{e.stopPropagation(); setEditDesk(desk)}} className="desk-button-container">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Section from "./Section.tsx";
@@ -20,6 +20,8 @@ export default function TaskList() {
   const [tasks, setTasks] = useState<taskDetails[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [editTask, setEditTask] = useState<taskDetails | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -76,6 +78,9 @@ export default function TaskList() {
 
   return (
     <div className="container">
+      <div className="return-button-container">
+        <img src="/icons/back.png" className="return-button" onClick={() => navigate("/desks")}/>
+      </div>
       {deskId && isAddModalOpen && (
         <TaskModal
           method="POST"

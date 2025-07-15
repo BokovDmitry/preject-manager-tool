@@ -83,10 +83,22 @@
         font-family: "Montserrat", sans-serif;
         font-size: 0.9em;
   
-  
         &:focus {
           border: none;
         }
+      }
+      .error {
+        border: 2px solid red;
+
+        &:focus {
+          border: none;
+          outline: 2px solid red;
+        }
+      }
+
+      .validation-error {
+        color: red;
+        margin: 0;
       }
     }
   }

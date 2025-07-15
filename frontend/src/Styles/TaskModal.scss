@@ -88,6 +88,19 @@
           outline: 2px solid rgb(57, 110, 255);
         }
       }
+      .error {
+        border: 2px solid red;
+
+        &:focus {
+          border: none;
+          outline: 2px solid red;
+        }
+      }
+
+      .validation-error {
+        color: red;
+        margin: 0;
+      }
     }
   }
 

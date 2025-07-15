@@ -68,6 +68,17 @@
   background-color: rgb(57, 110, 255);
   border-radius: 30px;
 }
+.desks-container .desk-container .desk-content .desk-progress-container .desk-progress-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  color: rgb(20, 49, 129);
+  font-weight: 900;
+  pointer-events: none;
+}
 .desks-container .desk-container .desk-content .desk-buttons-container {
   grid-area: buttons;
   display: flex;

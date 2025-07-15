@@ -24,11 +24,20 @@ export default function TaskModal({method, task, onClose, deskId, taskId} : Task
 
     const [title, setTitle] = useState<string>(task?.title || "")
     const [done, setDone] = useState<boolean>(task?.done || false)
+    const [error, setError] = useState<boolean>(false)
     const [state, setState] = useState<TaskState>(task?.state || TaskState.TODO)
+
+    const validateTitle = () => {
+        const regex = /^.+$/
+        return regex.test(title)
+    }
 
     const onSave = async() => {
         try {
-
+            if(!validateTitle()) {
+                setError(true)
+                return
+            }
             const payload : TaskDetails = {title, done, state}
     
             const url = method === "POST"
@@ -71,8 +80,9 @@ export default function TaskModal({method, task, onClose, deskId, taskId} : Task
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Task title"
-                        className="task-modal-input"
+                        className={`task-modal-input ${error ? "error" : ""}`}
                     />
+                    <p className="validation-error" style={{ display : error ? "block" : "none"}}>Title field can not be empty</p>
                 </div>
 
                 <StateSelector value={state} onChange={setState}/>
