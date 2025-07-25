@@ -82,6 +82,17 @@
   border: none;
   outline: 2px solid rgb(57, 110, 255);
 }
+.task-modal-container .task-modal-content .task-modal-field .error {
+  border: 2px solid red;
+}
+.task-modal-container .task-modal-content .task-modal-field .error:focus {
+  border: none;
+  outline: 2px solid red;
+}
+.task-modal-container .task-modal-content .task-modal-field .validation-error {
+  color: red;
+  margin: 0;
+}
 .task-modal-container .task-modal-buttons-container {
   width: 100%;
   display: flex;

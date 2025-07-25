@@ -81,6 +81,17 @@
 .desk-modal-container .desk-modal-content .desk-modal-field .desk-modal-input:focus {
   border: none;
 }
+.desk-modal-container .desk-modal-content .desk-modal-field .error {
+  border: 2px solid red;
+}
+.desk-modal-container .desk-modal-content .desk-modal-field .error:focus {
+  border: none;
+  outline: 2px solid red;
+}
+.desk-modal-container .desk-modal-content .desk-modal-field .validation-error {
+  color: red;
+  margin: 0;
+}
 .desk-modal-container .desk-modal-buttons-container {
   width: 100%;
   display: flex;
