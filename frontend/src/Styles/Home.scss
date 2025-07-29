@@ -1,0 +1,14 @@
+.background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(#396eff, #ffff);
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.home-container {
+    position: relative;
+    z-index: 1;
+}

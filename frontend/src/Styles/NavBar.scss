@@ -4,6 +4,7 @@
     height: clamp(50px, 12vh, 150px);
     padding: 2em 0;
     box-sizing: border-box;
+    z-index: 2;
 
     .navbar-content {
         position: relative;

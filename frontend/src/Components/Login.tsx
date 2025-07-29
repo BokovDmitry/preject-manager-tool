@@ -1,14 +1,19 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
-import NavBar from './NavBar.tsx'
+import Register from "./Register.tsx"
+
+import "../Styles/Login.scss"
 
 export default function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [registerForm, setRegisterForm] = useState<boolean>(false)
+    const [logged, setLogged] = useState<boolean>(false)
 
-    const handleSumbit = async(e) => {
+    const handleSubmit = async(e) => {
        e.preventDefault();
        
        try{
@@ -32,19 +37,35 @@ export default function Login() {
        }
     } 
 
-    return (
-        <div className="login-container">
-            <h3 className="login-title"></h3>
-            <form className="login-form" method="post" onSubmit={handleSumbit}>
-                <label className="login-form-filed-label"> Username
-                    <input type="text" placeholder="Username" className="login-form-field" onChange={(e) => setUsername(e.target.value)}/>
-                </label>
-                <label className="login-form-filed-label"> Password
-                    <input type="password" placeholder="Password" className="login-form-field" onChange={(e) => setPassword(e.target.value)}/>
-                </label>
+    useEffect(() => {
+        if(localStorage.getItem("token") !== null)
+            setLogged(true)
+        else
+            setLogged(false)
 
-                <input type='submit' className='login-form-send' value="Login" />
-            </form>
-        </div>
+        console.log(logged)
+    })
+
+    return (
+        <>
+            {registerForm ? <Register onCancel={()=>setRegisterForm(false)}/> : 
+            <div className="login-container">
+                <h3 className="login-title">Login</h3>
+                <form className="login-form" method="post" onSubmit={handleSubmit}>
+                    <label className="login-form-field-label"> Username
+                        <input type="text" placeholder="Username" className="login-form-field" onChange={(e) => setUsername(e.target.value)}/>
+                    </label>
+                    <label className="login-form-field-label"> Password
+                        <input type="password" placeholder="Password" className="login-form-field" onChange={(e) => setPassword(e.target.value)}/>
+                    </label>
+
+                    <input type='submit' className='login-form-send' value="Login" />
+                </form>
+                <p className='login-form-text'>Don't have an account yet? <span 
+                                                                            className='login-form-register-link'
+                                                                            onClick={()=>setRegisterForm(true)}>Register</span>!</p>
+            </div>
+                }
+        </>
     )
 } 
