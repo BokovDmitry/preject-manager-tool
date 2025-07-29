@@ -1,5 +1,4 @@
 import {useState,useEffect} from 'react';
-import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 import Register from "./Register.tsx"
@@ -31,7 +30,7 @@ export default function Login() {
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            window.location.href = '/';
+            window.location.href = '/home';
        } catch (error) {
             console.error('Login failed:', error);
        }
